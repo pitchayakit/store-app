@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const MenuItemPromotion = (sequelize) => {
-    const MenuItemPromotion = sequelize.define("MenuItemPromotions", {
+    const MenuItemPromotion = sequelize.define("menuItemPromotions", {
         menuItemId: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -10,6 +10,8 @@ const MenuItemPromotion = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+    },{
+        tableName: "MenuItemPromotions",
     });
 
     return MenuItemPromotion;

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const MenuItem = (sequelize) => {
-    const MenuItem = sequelize.define("MenuItems", {
+    const MenuItem = sequelize.define("menuItems", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -10,6 +10,8 @@ const MenuItem = (sequelize) => {
             type: DataTypes.FLOAT,
             allowNull: false,
         },
+    }, {
+        tableName: "MenuItems",
     });
 
     MenuItem.associate = (models) => {

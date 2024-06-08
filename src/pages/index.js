@@ -123,7 +123,7 @@ export default function Home({ menuItems, customers }) {
                     >
                         <h2 className="text-xl font-bold">{customer.name}</h2>
                         <p>
-                            {customer.has_member_card ? "Member" : "Non-member"}
+                            {customer.hasMemberCard ? "Member" : "Non-member"}
                         </p>
                     </div>
                 ))}

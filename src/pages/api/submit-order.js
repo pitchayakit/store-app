@@ -17,7 +17,7 @@ export const calculateTotalPrice = async (customerId, selectedMenuItems) => {
     const menuItems = await menuItemService.findAll({
         where: { id: selectedmenuItemIds },
     });
-    //console.log(menuItems.data)
+
     let total = 0;
 
     // Calculate the total price
@@ -25,8 +25,21 @@ export const calculateTotalPrice = async (customerId, selectedMenuItems) => {
         const selectedmenuItem = selectedMenuItems.find(
             (item) => item.id === menuItem.id
         );
-
+        
         total += menuItem.price * selectedmenuItem.quantity;
+
+        // Apply a 5% discount if the customer bought more than 2 items
+        if (selectedmenuItem.quantity >= 2 && menuItem.promotions.length > 0) {
+            const { promotions } = menuItem;
+
+            // Find the promotion with ID 2 which is the 5% discount
+            const discount = promotions.find(promotion => promotion.id == 2);
+
+            // Apply the discount if it exists
+            if(discount) {
+                total *= 1 - discount.discount_percentage;
+            }
+        }
     }
 
     // Apply a 10% discount if the customer is a member

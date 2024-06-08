@@ -13,7 +13,7 @@ module.exports = {
                 },
                 {
                     description: "5% discount",
-                    discount_percentage: 0.2,
+                    discount_percentage: 0.05,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },

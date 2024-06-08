@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const Order = (sequelize) => {
-    const Order = sequelize.define("Orders", {
+    const Order = sequelize.define("orders", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -15,6 +15,8 @@ const Order = (sequelize) => {
             type: DataTypes.FLOAT,
             allowNull: false,
         },
+    }, {
+        tableName: "Orders",
     });
 
     return Order;

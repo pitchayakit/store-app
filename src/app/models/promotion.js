@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const Promotion = (sequelize) => {
-    const Promotion = sequelize.define("Promotions", {
+    const Promotion = sequelize.define("promotions", {
         description: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -10,6 +10,8 @@ const Promotion = (sequelize) => {
             type: DataTypes.FLOAT,
             allowNull: false,
         },
+    }, {
+        tableName: "Promotions",
     });
 
     Promotion.associate = (models) => {

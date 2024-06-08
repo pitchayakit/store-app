@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 const Customer = (sequelize) => {
-    const Customer = sequelize.define("Customers", {
+    const Customer = sequelize.define("customers", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -15,6 +15,8 @@ const Customer = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
+    }, {
+        tableName: "Customers",
     });
 
     return Customer;
