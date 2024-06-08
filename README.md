@@ -73,3 +73,15 @@ Please note the following discount conditions:
 Once you've reviewed your order, you can submit it. The order will be stored in the database for record-keeping.
 
 ![Screenshot showing the order stored in the database](./doc/images/image3.jpg)
+
+## Testing
+
+This project uses Jest for testing. Tests are used to verify the correctness of the price calculation logic among other functionalities.
+
+To run the tests, you need to have Node.js and npm installed on your machine. Once you have these installed, navigate to the project directory in your terminal and run the following command:
+
+```
+npm run test
+```
+
+![Screenshot showing the order stored in the database](./doc/images/image4.jpg)
