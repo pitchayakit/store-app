@@ -3,20 +3,24 @@ class services {
         this.model = model;
     }
 
-    async findAll() {
-        const rows =  await this.model.findAll();
+    async findAll(option = {}) {
+        const where = option.where || {};
+        const rows =  await this.model.findAll({
+            where,
+            order: [["id", "DESC"]],
+        });
         
         return {
             data: JSON.parse(JSON.stringify(rows)),
         }
     }
 
-    async findAllWithPagination(query = {}) {
+    async findAllWithPagination(option = {}) {
         const limit = 9; // number of records per page
-        const page = query.page ? Number(query.page) : 1;
+        const page = option.page ? Number(option.page) : 1;
         const offset = (page - 1) * limit;
 
-        const where = {};
+        const where = option.where || {};
 
         const { count, rows } = await this.model.findAndCountAll({
             where,
@@ -33,8 +37,8 @@ class services {
     }
 
     async findById(id) {
-        const row = this.model.findByPk(id);
-
+        const row = await this.model.findByPk(id);
+        
         return JSON.parse(JSON.stringify(row));
     }
 

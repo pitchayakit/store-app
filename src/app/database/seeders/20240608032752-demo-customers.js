@@ -7,13 +7,13 @@ module.exports = {
             [
                 {
                     name: "John Doe",
-                    has_member_card: false,
+                    hasMemberCard: false,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
                 {
                     name: "James Smith",
-                    has_member_card: true,
+                    hasMemberCard: true,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },

@@ -2,11 +2,16 @@ import { DataTypes } from "sequelize";
 
 const Customer = (sequelize) => {
     const Customer = sequelize.define("Customers", {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        has_member_card: {
+        hasMemberCard: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },

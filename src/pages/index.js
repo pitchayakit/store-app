@@ -1,7 +1,7 @@
 import "../app/globals.css";
 import MenuItemService from "@/app/services/menuItem";
 import CustomerService from "@/app/services/customer";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export async function getServerSideProps() {
     const menuItemService = new MenuItemService();
@@ -21,6 +21,40 @@ export async function getServerSideProps() {
 export default function Home({ menuItems, customers }) {
     const [selectedCustomer, setSelectedCustomer] = useState(customers.data[0]);
     const [selectedMenuItems, setSelectedMenuItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        const handleSubmit = async () => {
+            const menuItems = selectedMenuItems.map((item) => {
+                return {
+                    id: item.id,
+                    quantity: item.quantity,
+                };
+            });
+
+            const response = await fetch("/api/calculate-price", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    customerId: selectedCustomer.id,
+                    selectedmenuItems: menuItems,
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setTotalPrice(data.total);
+            } else {
+                console.error("Failed to calculate total");
+            }
+        };
+
+        if (selectedCustomer && selectedMenuItems.length > 0) {
+            handleSubmit();
+        }
+    }, [selectedCustomer, selectedMenuItems]);
 
     const handleCustomerClick = (customer) => {
         setSelectedCustomer(customer);
@@ -54,7 +88,7 @@ export default function Home({ menuItems, customers }) {
     return (
         <main className="flex flex-col items-center justify-between p-24">
             <h1 className="pb-4 text-6xl font-bold">POS store</h1>
-            
+
             <h2 className="py-4 text-4xl font-bold">Customers</h2>
             <section className="grid grid-cols-3 gap-4">
                 {customers.data.map((customer) => (
@@ -106,8 +140,10 @@ export default function Home({ menuItems, customers }) {
                 ))}
             </section>
 
-            <h2 className="py-4 text-4xl font-bold">{selectedCustomer.name} Order</h2>
- 
+            <h2 className="py-4 text-4xl font-bold">
+                {selectedCustomer.name} Order
+            </h2>
+
             {selectedMenuItems.length > 0 ? (
                 <section className="flex flex-wrap gap-4">
                     {selectedMenuItems.map((menuItem) => (
@@ -128,6 +164,8 @@ export default function Home({ menuItems, customers }) {
                     <p>Your order is empty.</p>
                 </div>
             )}
+
+            <p className="py-4">Total Price: ${totalPrice.toFixed(2)}</p>
         </main>
     );
 }

@@ -11,7 +11,7 @@ module.exports = {
             name: {
                 type: Sequelize.STRING,
             },
-            has_member_card: {
+            hasMemberCard: {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false,
             },
