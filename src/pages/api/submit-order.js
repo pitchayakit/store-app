@@ -5,6 +5,11 @@ import OrderService from "@/app/services/order";
 import OrderItemService from "@/app/services/orderItem";
 
 export const calculateTotalPrice = async (customerId, selectedMenuItems) => {
+    // Validate the input
+    if (!Array.isArray(selectedMenuItems)) {
+        throw new TypeError("Items must be an array");
+    }
+
     // Find the customer by ID
     const customerService = new CustomerService();
     const customer = await customerService.findById(customerId);

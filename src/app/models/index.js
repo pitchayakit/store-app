@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import sequelize from "../database/sequelize.mjs";
+import sequelize from "../database/sequelize.js";
 import MenuItem from "./menuItem.js";
 import Promotion from "./promotion.js";
 import Order from "./order.js";
