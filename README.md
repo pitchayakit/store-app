@@ -6,6 +6,7 @@ This is a boilerplate for a Point of Sale (POS) system. It provides a starting p
 1. [Prerequisites](#prerequisites)
 2. [Getting Started](#getting-started)
 3. [Accessing the Server](#accessing-the-server)
+4. [Using the Application](#using-the-application)
 
 ## Prerequisites
 
@@ -45,3 +46,30 @@ Use the following credentials to access into the database:
 Username: admin
 Password: password
 ```
+
+## Using the Application
+
+This section provides a step-by-step guide on how to use the application.
+
+### Step 1: Selecting Items
+
+First, choose the member and the menu items you want to order. For each menu item, specify the quantity you want to order.
+
+![Screenshot showing the selection of a member and menu items](./doc/images/image1.jpg)
+
+### Step 2: Reviewing Your Order
+
+After selecting items, you can review your order and the total price. 
+
+Please note the following discount conditions:
+
+- Members receive a 10% discount on their orders.
+- Orders that include double quantities of the Orange, Pink, or Green sets receive a 5% discount.
+
+![Screenshot showing an order review with the total price](./doc/images/image2.jpg)
+
+### Step 3: Storing the Order
+
+Once you've reviewed your order, you can submit it. The order will be stored in the database for record-keeping.
+
+![Screenshot showing the order stored in the database](./doc/images/image3.jpg)
