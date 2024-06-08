@@ -6,8 +6,20 @@ module.exports = {
             "MenuItemPromotions",
             [
                 {
-                    menuItemId: 1,
-                    promotionId: 1,
+                    menuItemId: 7,
+                    promotionId: 2,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    menuItemId: 5,
+                    promotionId: 2,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    menuItemId: 2,
+                    promotionId: 2,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },

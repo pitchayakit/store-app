@@ -12,6 +12,13 @@ const Promotion = (sequelize) => {
         },
     });
 
+    Promotion.associate = (models) => {
+        Promotion.belongsToMany(models.MenuItem, {
+            through: "MenuItemPromotions",
+            foreignKey: "promotionId",
+        });
+    };
+
     return Promotion;
 };
 

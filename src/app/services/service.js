@@ -5,8 +5,11 @@ class services {
 
     async findAll(option = {}) {
         const where = option.where || {};
+        const include = option.include || [];
+
         const rows =  await this.model.findAll({
             where,
+            include,
             order: [["id", "DESC"]],
         });
         

@@ -12,7 +12,15 @@ const MenuItem = (sequelize) => {
         },
     });
 
+    MenuItem.associate = (models) => {
+        MenuItem.belongsToMany(models.Promotion, {
+            through: "MenuItemPromotions",
+            foreignKey: "menuItemId",
+        });
+    };    
+
     return MenuItem;
 };
+
 
 export default MenuItem;

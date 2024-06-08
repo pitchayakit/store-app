@@ -17,7 +17,7 @@ export const calculateTotalPrice = async (customerId, selectedMenuItems) => {
     const menuItems = await menuItemService.findAll({
         where: { id: selectedmenuItemIds },
     });
-
+    //console.log(menuItems.data)
     let total = 0;
 
     // Calculate the total price
@@ -29,9 +29,9 @@ export const calculateTotalPrice = async (customerId, selectedMenuItems) => {
         total += menuItem.price * selectedmenuItem.quantity;
     }
 
-    // Apply a 5% discount if the customer is a member
+    // Apply a 10% discount if the customer is a member
     if (customer.hasMemberCard) {
-        total *= 0.95;
+        total *= 0.9;
     }
 
     return total;
