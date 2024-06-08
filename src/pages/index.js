@@ -22,9 +22,10 @@ export default function Home({ menuItems, customers }) {
     const [selectedCustomer, setSelectedCustomer] = useState(customers.data[0]);
     const [selectedMenuItems, setSelectedMenuItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [submitStatus, setSubmitStatus] = useState(null);
 
     useEffect(() => {
-        const handleSubmit = async () => {
+        const handleCalculatePrice = async () => {
             const menuItems = selectedMenuItems.map((item) => {
                 return {
                     id: item.id,
@@ -52,9 +53,28 @@ export default function Home({ menuItems, customers }) {
         };
 
         if (selectedCustomer && selectedMenuItems.length > 0) {
-            handleSubmit();
+            handleCalculatePrice();
         }
     }, [selectedCustomer, selectedMenuItems]);
+
+    const handleSubmitOrder = async () => {
+        const response = await fetch("/api/submit-order", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                customerId: selectedCustomer.id,
+                selectedMenuItems,
+            }),
+        });
+
+        if (response.ok) {
+            setSubmitStatus(1);
+        } else {
+            setSubmitStatus(0);
+        }
+    };
 
     const handleCustomerClick = (customer) => {
         setSelectedCustomer(customer);
@@ -166,6 +186,19 @@ export default function Home({ menuItems, customers }) {
             )}
 
             <p className="py-4">Total Price: ${totalPrice.toFixed(2)}</p>
+
+            {selectedMenuItems.length > 0 && submitStatus !== 1 && (
+                <button
+                    className="p-4 text-white bg-blue-500 rounded-lg shadow-lg"
+                    onClick={handleSubmitOrder}
+                >
+                    Confirm Order
+                </button>
+            )}
+
+            {submitStatus === 1 && (
+                <p className="py-4 text-green-500">Order submitted successfully</p>
+            )}
         </main>
     );
 }

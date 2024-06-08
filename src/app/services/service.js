@@ -43,7 +43,13 @@ class services {
     }
 
     async create(data) {
-        const row = this.model.create(data);
+        const row = await this.model.create(data);
+
+        return JSON.parse(JSON.stringify(row));
+    }
+
+    async bulkCreate(data) {
+        const row = this.model.bulkCreate(data);
 
         return JSON.parse(JSON.stringify(row));
     }

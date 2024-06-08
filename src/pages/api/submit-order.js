@@ -1,7 +1,8 @@
 // pages/api/submit-order.js
 import CustomerService from "@/app/services/customer";
 import MenuItemService from "@/app/services/menuItem";
-//import OrderService from "./order"; // Assuming you have an OrderService
+import OrderService from "@/app/services/order";
+import OrderItemService from "@/app/services/orderItem";
 
 export const calculateTotalPrice = async (customerId, selectedMenuItems) => {
     // Find the customer by ID
@@ -36,26 +37,36 @@ export const calculateTotalPrice = async (customerId, selectedMenuItems) => {
     return total;
 };
 
-// export default async function handler(req, res) {
-//     // Only allow POST requests
-//     if (req.method !== "POST") {
-//         return res.status(405).json({ message: "Method not allowed" });
-//     }
+export default async function handler(req, res) {
+    // Only allow POST requests
+    if (req.method !== "POST") {
+        return res.status(405).json({ message: "Method not allowed" });
+    }
 
-//     // Get the customer ID and selected menu items from the request body
-//     const { customerId, selectedMenuItems } = req.body;
+    // Get the customer ID and selected menu items from the request body
+    const { customerId, selectedMenuItems } = req.body;
 
-//     // Calculate the total price
-//     const total = await calculateTotalPrice(customerId, selectedMenuItems);
+    // Calculate the total price
+    const total = await calculateTotalPrice(customerId, selectedMenuItems);
 
-//     // Create the order
-//     const orderService = new OrderService();
-//     const order = await orderService.create({
-//         customerId: customerId,
-//         menuItems: selectedMenuItems,
-//         total: total,
-//     });
+    // Create the order
+    const orderService = new OrderService();
+    const order = await orderService.create({
+        customerId: customerId,
+        menuItems: selectedMenuItems,
+        totalPrice: total,
+    });
 
-//     // Return the order in the response
-//     res.status(200).json({ order });
-// }
+    // Create the order items
+    const orderItemService = new OrderItemService();
+    await orderItemService.bulkCreate(
+        selectedMenuItems.map((item) => ({
+            orderId: order.id,
+            menuItemId: item.id,
+            quantity: item.quantity,
+        }))
+    );
+
+    // Return the order in the response
+    res.status(200).json({ order });
+}
