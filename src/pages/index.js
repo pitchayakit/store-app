@@ -86,7 +86,7 @@ export default function Home({ menuItems, customers }) {
     };
 
     return (
-        <main className="flex flex-col items-center justify-between p-24">
+        <main className="flex flex-col items-center justify-between py-4">
             <h1 className="pb-4 text-6xl font-bold">POS store</h1>
 
             <h2 className="py-4 text-4xl font-bold">Customers</h2>
