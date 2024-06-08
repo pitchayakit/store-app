@@ -107,10 +107,10 @@ export default function Home({ menuItems, customers }) {
 
     return (
         <main className="flex flex-col items-center justify-between py-4">
-            <h1 className="pb-4 text-6xl font-bold">POS store</h1>
+            <h1 className="pb-4 text-6xl font-bold">POS system</h1>
 
             <h2 className="py-4 text-4xl font-bold">Customers</h2>
-            <section className="grid grid-cols-3 gap-4">
+            <section className="flex justify-center gap-4">
                 {customers.data.map((customer) => (
                     <div
                         key={customer.id}
@@ -185,7 +185,7 @@ export default function Home({ menuItems, customers }) {
                 </div>
             )}
 
-            <p className="py-4">Total Price: ${totalPrice.toFixed(2)}</p>
+            <p className="py-4 text-2xl">Total Price: ${totalPrice.toFixed(2)}</p>
 
             {selectedMenuItems.length > 0 && submitStatus !== 1 && (
                 <button
