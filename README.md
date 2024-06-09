@@ -7,6 +7,7 @@ This is a boilerplate for a Point of Sale (POS) system. It provides a starting p
 2. [Getting Started](#getting-started)
 3. [Accessing the Server](#accessing-the-server)
 4. [Using the Application](#using-the-application)
+5. [Testing](#testing)
 
 ## Prerequisites
 
