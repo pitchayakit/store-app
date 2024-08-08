@@ -229,4 +229,6 @@ export default function Home({ menuItems, customers }) {
             </main>
         );
     }
+
+    return <p>Loading...</p>;
 }
